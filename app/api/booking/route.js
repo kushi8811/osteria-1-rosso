@@ -1,19 +1,16 @@
 import { supabase } from "@/app/utils/supabaseClient";
 import nodemailer from "nodemailer";
-import { v4 as uuidv4 } from "uuid"; // Importing uuidv4 to generate unique IDs
+import { v4 as uuidv4 } from "uuid";
 const GMAIL_APP_PASSWORD = "pmzxitnhtksyybym";
 const BUSINESS_EMAIL = "osteriaunorosso@gmail.com";
 const GMAIL_USER = "osteriaunorosso@gmail.com";
 
 export async function POST(req) {
   try {
-    // Parse the incoming request body to get booking data
     const formData = await req.json();
 
-    // Generate a unique ID using uuidv4
     const uniqueBookingId = uuidv4();
 
-    // Insert booking into the Supabase table 'bookings'
     const { data, error } = await supabase.from("bookings").insert([
       {
         id: uniqueBookingId,
@@ -23,7 +20,7 @@ export async function POST(req) {
         time: formData.time,
         guests: formData.guests,
         specialRequest: formData.specialRequest || "",
-        status: "pending", // Initial status is 'pending' before approval
+        status: "pending",
       },
     ]);
     if (error) {
@@ -51,16 +48,14 @@ export async function POST(req) {
       </p>
     `;
 
-    // Create the nodemailer transporter for sending the email
     const transporter = nodemailer.createTransport({
-      service: "Gmail", // Using Gmail service
+      service: "Gmail",
       auth: {
-        user: GMAIL_USER, // Your business email
-        pass: GMAIL_APP_PASSWORD, // Your Gmail app password
+        user: GMAIL_USER,
+        pass: GMAIL_APP_PASSWORD,
       },
     });
 
-    // Set up email options
     const mailOptions = {
       from: GMAIL_USER,
       to: BUSINESS_EMAIL,

@@ -45,7 +45,8 @@ export default function BookingForm() {
         </h2>
         {success ? (
           <p className="text-green-600 text-center font-semibold">
-            Booking successfully submitted! 🎉
+            Booking successfully submitted! 🎉 Reservation details will be sent
+            in the email! Thank you ~ Osteria 1 Rosso
           </p>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
