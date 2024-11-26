@@ -11,7 +11,7 @@ const josefin = Josefin_Sans({
 export const metadata = {
   title: {
     template: "%s : Osteria 1 Rosso",
-    default: "Welcome / Osteria 1 Rosso",
+    default: " Osteria 1 Rosso",
   },
 };
 
