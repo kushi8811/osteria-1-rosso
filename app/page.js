@@ -5,6 +5,7 @@ import Carousel from "./_components/Carousel";
 import Map from "./_components/Map";
 import { Suspense } from "react";
 import Footer from "./_components/Footer";
+import Link from "next/link";
 
 export default async function Home() {
   const reviews = await getReviews();
@@ -26,9 +27,12 @@ export default async function Home() {
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center animate__animated animate__fadeIn">
               Welcome to Osteria 1 Rosso
             </h1>
-            <button className="mt-6 px-6 py-3 bg-accent-700 text-lg font-semibold rounded-lg hover:bg-accent-400 transition-all animate__animated animate__fadeIn animate__delay-1s">
+            <Link
+              href="/menu"
+              className="mt-6 px-6 py-3 bg-accent-700 text-lg font-semibold rounded-lg hover:bg-accent-400 transition-all animate__animated animate__fadeIn animate__delay-1s"
+            >
               Explore Our Menu
-            </button>
+            </Link>
           </div>
         </div>
 

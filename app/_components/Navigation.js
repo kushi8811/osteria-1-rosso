@@ -55,12 +55,7 @@ function Navigation() {
           >
             Gallery
           </a>
-          <button
-            className="text-3xl hover:text-primary-100 transition-transform duration-300 hover:scale-110"
-            onClick={handleContactClick}
-          >
-            Contact
-          </button>
+
           <a
             href="/booking"
             className="text-3xl hover:text-primary-100 transition-transform duration-300 hover:scale-110"
