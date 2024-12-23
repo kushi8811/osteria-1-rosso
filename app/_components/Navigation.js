@@ -63,6 +63,13 @@ function Navigation() {
           >
             Bookings
           </a>
+          <a
+            href="/new-year"
+            className="text-3xl hover:text-primary-100 transition-transform duration-300 hover:scale-110"
+            onClick={handleLinkClick}
+          >
+            New Year&apos;s Eve
+          </a>
         </div>
       </div>
 
@@ -92,6 +99,12 @@ function Navigation() {
           className="text-2xl text-white hover:text-primary-100 transition-transform duration-300 hover:scale-105 mx-4"
         >
           Bookings
+        </a>
+        <a
+          href="/new-year"
+          className="text-2xl text-white hover:text-primary-100 transition-transform duration-300 hover:scale-105 mx-4"
+        >
+          New Year&apos;s Eve{" "}
         </a>
       </div>
     </nav>

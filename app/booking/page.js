@@ -13,9 +13,18 @@ export default function BookingForm() {
   });
 
   const [success, setSuccess] = useState(false);
+  const [specialNotice, setSpecialNotice] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === "date") {
+      const selectedDate = new Date(value);
+      const isNewYearsEve =
+        selectedDate.getMonth() === 11 && selectedDate.getDate() === 31;
+      setSpecialNotice(isNewYearsEve);
+    }
+
     setFormData({ ...formData, [name]: value });
   };
 
@@ -39,7 +48,8 @@ export default function BookingForm() {
         backgroundImage: `url(${imagebg.src})`,
       }}
     >
-      <div className="w-11/12 sm:w-full p-4 sm:p-8 max-w-sm sm:max-w-lg bg-white bg-opacity-90 rounded-lg shadow-2xl">
+      <div className="w-11/12 sm:w-full p-4 sm:p-8 max-w-sm sm:max-w-lg bg-white bg-opacity-90 rounded-lg shadow-2xl -translate-y-12">
+        {/* Apply translate-y class for upward movement */}
         <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6">
           Book a Table
         </h2>
@@ -50,9 +60,16 @@ export default function BookingForm() {
           </p>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
+            {specialNotice && (
+              <div className="p-4 mb-4 text-sm text-yellow-800 bg-yellow-200 rounded-md">
+                Please note: Bookings for New Year&apos;s Eve (December 31st)
+                are €120 per person.
+              </div>
+            )}
+            {/* Form Inputs */}
             <div>
               <label
-                className="block text-gray-700 font-medium mb-1 text-sm sm:text-base"
+                className="block text-gray-700 font-medium mb-1"
                 htmlFor="name"
               >
                 Name
@@ -63,33 +80,15 @@ export default function BookingForm() {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-3 sm:px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Your Name"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>
-            <div>
-              <label
-                className="block text-gray-700 font-medium mb-1 text-sm sm:text-base"
-                htmlFor="email"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full px-3 sm:px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Your Email"
-                required
-              />
-            </div>
+            {/* Other Inputs */}
             <div className="space-y-4 sm:space-y-0 sm:flex sm:space-x-4">
               <div className="flex-1">
                 <label
-                  className="block text-gray-700 font-medium mb-1 text-sm sm:text-base"
+                  className="block text-gray-700 font-medium mb-1"
                   htmlFor="date"
                 >
                   Date
@@ -100,13 +99,13 @@ export default function BookingForm() {
                   name="date"
                   value={formData.date}
                   onChange={handleChange}
-                  className="w-full px-3 sm:px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>
               <div className="flex-1">
                 <label
-                  className="block text-gray-700 font-medium mb-1 text-sm sm:text-base"
+                  className="block text-gray-700 font-medium mb-1"
                   htmlFor="time"
                 >
                   Time
@@ -117,14 +116,14 @@ export default function BookingForm() {
                   name="time"
                   value={formData.time}
                   onChange={handleChange}
-                  className="w-full px-3 sm:px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>
             </div>
             <div>
               <label
-                className="block text-gray-700 font-medium mb-1 text-sm sm:text-base"
+                className="block text-gray-700 font-medium mb-1"
                 htmlFor="guests"
               >
                 Guests
@@ -137,30 +136,13 @@ export default function BookingForm() {
                 onChange={handleChange}
                 min="1"
                 max="20"
-                className="w-full px-3 sm:px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>
-            <div>
-              <label
-                className="block text-gray-700 font-medium mb-1 text-sm sm:text-base"
-                htmlFor="specialRequest"
-              >
-                Special Requests
-              </label>
-              <textarea
-                id="specialRequest"
-                name="specialRequest"
-                value={formData.specialRequest}
-                onChange={handleChange}
-                rows="3"
-                className="w-full px-3 sm:px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="E.g., Allergies, wheelchair access, etc."
-              ></textarea>
-            </div>
             <button
               type="submit"
-              className="w-full py-2 sm:py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition-all"
+              className="w-full py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition-all"
             >
               Submit Booking
             </button>
