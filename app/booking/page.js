@@ -69,7 +69,7 @@ export default function BookingForm() {
             {/* Form Inputs */}
             <div>
               <label
-                className="block text-gray-700 font-medium mb-1"
+                className="block text-black font-medium mb-1"
                 htmlFor="name"
               >
                 Name
