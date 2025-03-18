@@ -43,13 +43,12 @@ export default function BookingForm() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center"
+      className="min-h-screen  flex items-center justify-center bg-cover bg-center"
       style={{
         backgroundImage: `url(${imagebg.src})`,
       }}
     >
-      <div className="w-11/12 sm:w-full p-4 sm:p-8 max-w-sm sm:max-w-lg bg-white bg-opacity-90 rounded-lg shadow-2xl -translate-y-12">
-        {/* Apply translate-y class for upward movement */}
+      <div className="w-11/12 mt-[100px] sm:w-full p-4 sm:p-8 max-w-sm sm:max-w-lg bg-white bg-opacity-90 rounded-lg shadow-2xl -translate-y-12">
         <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6">
           Book a Table
         </h2>
@@ -66,7 +65,7 @@ export default function BookingForm() {
                 are €120 per person.
               </div>
             )}
-            {/* Form Inputs */}
+            {/* Name Input */}
             <div>
               <label
                 className="block text-gray-700 font-medium mb-1"
@@ -84,7 +83,25 @@ export default function BookingForm() {
                 required
               />
             </div>
-            {/* Other Inputs */}
+            {/* Email Input */}
+            <div>
+              <label
+                className="block text-gray-700 font-medium mb-1"
+                htmlFor="email"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            {/* Date & Time Inputs */}
             <div className="space-y-4 sm:space-y-0 sm:flex sm:space-x-4">
               <div className="flex-1">
                 <label
@@ -121,6 +138,7 @@ export default function BookingForm() {
                 />
               </div>
             </div>
+            {/* Guests Input */}
             <div>
               <label
                 className="block text-gray-700 font-medium mb-1"
@@ -140,6 +158,24 @@ export default function BookingForm() {
                 required
               />
             </div>
+            {/* Special Request Input */}
+            <div>
+              <label
+                className="block text-gray-700 font-medium mb-1"
+                htmlFor="specialRequest"
+              >
+                Special Request (Optional)
+              </label>
+              <textarea
+                id="specialRequest"
+                name="specialRequest"
+                value={formData.specialRequest}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                rows="3"
+              ></textarea>
+            </div>
+            {/* Submit Button */}
             <button
               type="submit"
               className="w-full py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition-all"

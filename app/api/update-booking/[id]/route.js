@@ -52,11 +52,38 @@ export async function GET(req, { params }) {
       subject: `Booking ${
         status === "accepted" ? "Confirmed" : "Rejected"
       } - Osteria Un Rosso`,
-      text: `Dear ${name},\n\nYour booking has been ${status}.\n\nReservation Details:\n- Name: ${name}\n- Date: ${date}\n- Time: ${time}\n- Guests: ${guests}\n\nThank you for choosing Osteria Un Rosso!`,
+      html: `
+        <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+          <h2 style="color: #d35400;">Dear ${name},</h2>
+          <p>We are writing to inform you that your booking has been <strong>${status}</strong>.</p>
+          <p><strong>Reservation Details:</strong></p>
+          <table style="border-collapse: collapse; width: 100%; margin: 20px 0;">
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Name:</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">${name}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Date:</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">${date}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Time:</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">${time}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Guests:</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">${guests}</td>
+            </tr>
+          </table>
+          <p>Thank you for choosing <strong>Osteria Un Rosso</strong>! We look forward to welcoming you soon.</p>
+          <p>If you have any questions or need further assistance, don't hesitate to contact us.</p>
+          <p style="font-size: 0.9em; color: #777;">Best regards,<br>The Osteria Un Rosso Team</p>
+        </div>
+      `,
     };
 
     await transporter.sendMail(mailOptions);
-    console.log("Confirmation email sent to user:", email);
+    console.log("Confirmation email sent to user:2", email);
 
     return new NextResponse(
       JSON.stringify({

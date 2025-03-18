@@ -16,7 +16,6 @@ export default async function getReviews() {
 
     // Check if data.result and data.result.reviews exist
     if (data.result && data.result.reviews) {
-      console.log("Reviews:", data.result.reviews);
       return data.result.reviews;
     } else {
       console.log("No reviews found.");

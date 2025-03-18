@@ -49,7 +49,9 @@ export async function POST(req) {
     `;
 
     const transporter = nodemailer.createTransport({
-      service: "Gmail",
+      host: "smtp.gmail.com",
+      port: 465, // Secure SMTP port
+      secure: true, // Use SSL
       auth: {
         user: GMAIL_USER,
         pass: GMAIL_APP_PASSWORD,
@@ -64,7 +66,7 @@ export async function POST(req) {
     };
 
     await transporter.sendMail(mailOptions);
-
+    console.log("Confirmation email sent to user:1", formData.email);
     return new Response(
       JSON.stringify({ message: "Booking saved and manager notified!", data }),
       { status: 200 }
