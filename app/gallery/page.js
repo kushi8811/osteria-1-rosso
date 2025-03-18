@@ -2,10 +2,10 @@ import Image from "next/image";
 import imagebg from "../../public/osteria-images/imagebg2.jpg";
 
 const galleryImages = [
-  "/osteria-images/gallery1.jpg",
-  "/osteria-images/gallery2.jpg",
+  "/osteria-images/gallery1.JPG",
+  "/osteria-images/gallery2.JPG",
   "/osteria-images/gallery3.jpg",
-  "/osteria-images/gallery4.jpg",
+  "/osteria-images/gallery4.JPG",
   "/osteria-images/gallery5.jpg",
   "/osteria-images/gallery6.jpg",
   "/osteria-images/gallery7.jpg",
