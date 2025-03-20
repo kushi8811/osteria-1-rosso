@@ -1,19 +1,20 @@
 import nodemailer from "nodemailer";
 import { supabase } from "@/app/utils/supabaseClient.js";
 import { NextResponse } from "next/server";
-const GMAIL_APP_PASSWORD = "pmzxitnhtksyybym";
-const BUSINESS_EMAIL = "osteriaunorosso@gmail.com";
-const GMAIL_USER = "osteriaunorosso@gmail.com";
 
-export async function GET(req, { params }) {
+const GMAIL_APP_PASSWORD = process.env.GMAIL_APP_PASSWORD;
+const BUSINESS_EMAIL = process.env.BUSINESS_EMAIL;
+const GMAIL_USER = process.env.GMAIL_USER;
+
+export async function GET(request, { params }) {
   try {
-    const { id } = await params;
+    const { id } = params;
 
     if (!id || typeof id !== "string") {
       return new NextResponse("Invalid booking ID.", { status: 400 });
     }
 
-    const status = req.nextUrl.searchParams.get("status");
+    const status = request.nextUrl.searchParams.get("status");
     if (!["accepted", "rejected"].includes(status)) {
       return new NextResponse("Invalid status.", { status: 400 });
     }
@@ -26,14 +27,10 @@ export async function GET(req, { params }) {
       .eq("id", sanitizedId)
       .single();
 
-    if (error) {
-      return new NextResponse("Failed to retrieve booking details.", {
-        status: 500,
+    if (error || !updatedBooking) {
+      return new NextResponse("Booking not found or failed to retrieve.", {
+        status: 404,
       });
-    }
-
-    if (!updatedBooking) {
-      return new NextResponse("Booking not found.", { status: 404 });
     }
 
     const { email, name, date, time, guests } = updatedBooking;
@@ -58,22 +55,10 @@ export async function GET(req, { params }) {
           <p>We are writing to inform you that your booking has been <strong>${status}</strong>.</p>
           <p><strong>Reservation Details:</strong></p>
           <table style="border-collapse: collapse; width: 100%; margin: 20px 0;">
-            <tr>
-              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Name:</td>
-              <td style="padding: 8px; border: 1px solid #ddd;">${name}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Date:</td>
-              <td style="padding: 8px; border: 1px solid #ddd;">${date}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Time:</td>
-              <td style="padding: 8px; border: 1px solid #ddd;">${time}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Guests:</td>
-              <td style="padding: 8px; border: 1px solid #ddd;">${guests}</td>
-            </tr>
+            <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Name:</td><td style="padding: 8px; border: 1px solid #ddd;">${name}</td></tr>
+            <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Date:</td><td style="padding: 8px; border: 1px solid #ddd;">${date}</td></tr>
+            <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Time:</td><td style="padding: 8px; border: 1px solid #ddd;">${time}</td></tr>
+            <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Guests:</td><td style="padding: 8px; border: 1px solid #ddd;">${guests}</td></tr>
           </table>
           <p>Thank you for choosing <strong>Osteria Un Rosso</strong>! We look forward to welcoming you soon.</p>
           <p>If you have any questions or need further assistance, don't hesitate to contact us.</p>
@@ -83,11 +68,11 @@ export async function GET(req, { params }) {
     };
 
     await transporter.sendMail(mailOptions);
-    console.log("Confirmation email sent to user:2", email);
+    console.log("Confirmation email sent to:", email);
 
     return new NextResponse(
       JSON.stringify({
-        message: `Booking ${status} successfully! Confirmation sent to user.`,
+        message: `Booking ${status} successfully updated! Confirmation sent to user.`,
       }),
       { status: 200 }
     );
