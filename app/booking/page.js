@@ -49,7 +49,7 @@ export default function BookingForm() {
       }}
     >
       <div className="w-11/12 mt-[100px] sm:w-full p-4 sm:p-8 max-w-sm sm:max-w-lg bg-white bg-opacity-90 rounded-lg shadow-2xl -translate-y-12">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-black mb-6">
           Book a Table
         </h2>
         {success ? (
@@ -68,7 +68,7 @@ export default function BookingForm() {
             {/* Name Input */}
             <div>
               <label
-                className="block text-gray-700 font-medium mb-1"
+                className="block text-black font-medium mb-1"
                 htmlFor="name"
               >
                 Name
@@ -86,7 +86,7 @@ export default function BookingForm() {
             {/* Email Input */}
             <div>
               <label
-                className="block text-gray-700 font-medium mb-1"
+                className="block text-black font-medium mb-1"
                 htmlFor="email"
               >
                 Email
@@ -105,7 +105,7 @@ export default function BookingForm() {
             <div className="space-y-4 sm:space-y-0 sm:flex sm:space-x-4">
               <div className="flex-1">
                 <label
-                  className="block text-gray-700 font-medium mb-1"
+                  className="block text-black font-medium mb-1"
                   htmlFor="date"
                 >
                   Date
@@ -122,7 +122,7 @@ export default function BookingForm() {
               </div>
               <div className="flex-1">
                 <label
-                  className="block text-gray-700 font-medium mb-1"
+                  className="block text-black font-medium mb-1"
                   htmlFor="time"
                 >
                   Time
@@ -135,13 +135,15 @@ export default function BookingForm() {
                   onChange={handleChange}
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
+                  min="12:00"
+                  max="22:30"
                 />
               </div>
             </div>
             {/* Guests Input */}
             <div>
               <label
-                className="block text-gray-700 font-medium mb-1"
+                className="block text-black font-medium mb-1"
                 htmlFor="guests"
               >
                 Guests
@@ -161,7 +163,7 @@ export default function BookingForm() {
             {/* Special Request Input */}
             <div>
               <label
-                className="block text-gray-700 font-medium mb-1"
+                className="block text-black font-medium mb-1"
                 htmlFor="specialRequest"
               >
                 Special Request (Optional)
