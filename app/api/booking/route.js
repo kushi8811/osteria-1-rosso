@@ -1,7 +1,7 @@
 import { supabase } from "@/app/utils/supabaseClient";
 import nodemailer from "nodemailer";
 import { v4 as uuidv4 } from "uuid";
-const GMAIL_APP_PASSWORD = "pmzxitnhtksyybym";
+const GMAIL_APP_PASSWORD = "pccirnkyevnwzeox";
 const BUSINESS_EMAIL = "osteriaunorosso@gmail.com";
 const GMAIL_USER = "osteriaunorosso@gmail.com";
 
