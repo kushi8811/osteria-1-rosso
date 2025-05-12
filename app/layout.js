@@ -2,6 +2,7 @@ import { Josefin_Sans } from "next/font/google";
 import Header from "./_components/Header";
 import "./globals.css";
 import ScrollToFooter from "./_components/Scroll";
+import CookieBanner from "./_components/CookieBanner";
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
@@ -47,6 +48,7 @@ export default async function RootLayout({ children }) {
         {/* End Google Tag Manager (noscript) */}
 
         <Header />
+        <CookieBanner />
         <main className="relative">{children}</main>
       </body>
     </html>
