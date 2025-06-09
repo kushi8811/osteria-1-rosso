@@ -10,7 +10,7 @@ const Footer = () => {
           <h3 className="text-lg font-bold mb-3">Contact Us</h3>
           <div className="flex items-center mb-2">
             <PhoneIcon className="w-5 h-5 mr-3 text-white" />
-            <span>055 2670461</span>
+            <span>055 9867067</span>
           </div>
           <div className="flex items-center mb-2">
             <EnvelopeIcon className="w-5 h-5 mr-3 text-white" />
